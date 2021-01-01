@@ -1,4 +1,5 @@
-import React from 'react';
+import React, { Fragment } from 'react';
+import { signout, isAuthenticated } from "../auth";
 import { Link, withRouter } from "react-router-dom";
 
 const Menu = ({history}) => {
@@ -19,15 +20,48 @@ const Menu = ({history}) => {
                     </Link>
                 </li>
                 <li className="nav-item">
-                    <Link className="nav-link" style={isActive(history, "/signin")} to="/signin">
-                        Signin
+                    <Link className="nav-link" style={isActive(history, "/dashboard")} to="/dashboard">
+                        Dashboard
                     </Link>
                 </li>
+                {!isAuthenticated() && (
+                <Fragment>
+                    <li className="nav-item">
+                        <Link
+                            className="nav-link"
+                            style={isActive(history, "/signin")}
+                            to="/signin"
+                        >
+                            Signin
+                        </Link>
+                    </li>
+
+                    <li className="nav-item">
+                        <Link
+                            className="nav-link"
+                            style={isActive(history, "/signup")}
+                            to="/signup"
+                        >
+                            Signup
+                        </Link>
+                    </li>
+                </Fragment>
+            )}
+                {isAuthenticated() && (
                 <li className="nav-item">
-                    <Link className="nav-link" style={isActive(history, "/signup")} to="/signup">
-                        Signup
-                    </Link>
+                    <span
+                        className="nav-link"
+                        style={{ cursor: "pointer", color: "#ffffff" }}
+                        onClick={() =>
+                            signout(() => {
+                                history.push("/");
+                            })
+                        }
+                    >
+                        Signout
+                    </span>
                 </li>
+            )}
             </ul>
         </div>
     );
