@@ -16,13 +16,14 @@ exports.categoryById = (req, res, next, id) => {
 
 exports.create=async(req,res)=>{
     const category=new Category(req.body)
-    try{
-         await category.save()
-         
-         res.status(201).json(category)
-      }catch(error){
-          res.status(409).json({err:errorHandler(error)})
-      }
+    category.save((err, data) => {
+        if (err) {
+            return res.status(400).json({
+                error: errorHandler(err)
+            });
+        }
+        res.json({ data });
+    });
 
 }
 

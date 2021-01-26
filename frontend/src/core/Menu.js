@@ -19,11 +19,36 @@ const Menu = ({history}) => {
                         Home
                     </Link>
                 </li>
+
                 <li className="nav-item">
-                    <Link className="nav-link" style={isActive(history, "/dashboard")} to="/dashboard">
+                    <Link className="nav-link" style={isActive(history, "/")} to="/shop">
+                        Shop
+                    </Link>
+                </li>
+                
+            {isAuthenticated() && isAuthenticated().user.role === 0 && (
+                <li className="nav-item">
+                    <Link
+                        className="nav-link"
+                        style={isActive(history, "/user/dashboard")}
+                        to="/user/dashboard"
+                    >
                         Dashboard
                     </Link>
                 </li>
+            )}
+
+            {isAuthenticated() && isAuthenticated().user.role === 1 && (
+                <li className="nav-item">
+                    <Link
+                        className="nav-link"
+                        style={isActive(history, "/admin/dashboard")}
+                        to="/admin/dashboard"
+                    >
+                        Dashboard
+                    </Link>
+                </li>
+            )}
                 {!isAuthenticated() && (
                 <Fragment>
                     <li className="nav-item">
