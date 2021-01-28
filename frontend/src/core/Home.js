@@ -2,6 +2,7 @@ import React, { useState, useEffect }  from 'react';
 import { getProducts } from './apiCore';
 import Layout from './Layout';
 import Card from './Card';
+import Search from './Search';
 
 const Home = () => {
 
@@ -39,7 +40,8 @@ const Home = () => {
             title="FullStack React Node MongoDB Ecommerce App"
             description="Node React E-commerce App"
             className="container-fluid">
-
+             
+             <Search/>
             <h2 className="mb-4">New Arrivals</h2>
             <div className="row">
                 {productsByArrival.map((product, i) => (
