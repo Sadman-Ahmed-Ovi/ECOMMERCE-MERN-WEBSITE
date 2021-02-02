@@ -13,7 +13,7 @@ const Signin = () => {
     });
     
     const { email, password, loading, error, redirectToReferrer } = values;
-    const { user } = isAuthenticated();
+    const user = isAuthenticated().user;
 
     const handleChange = name => event => {
         setValues({ ...values, error: false, [name]: event.target.value });
